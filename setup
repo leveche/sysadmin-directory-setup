@@ -1,0 +1,16 @@
+#!/bin/bash
+
+export SYMAS_PREFIX=/opt/symas
+
+export PATH=$PATH:$SYMAS_PREFIX/lib:$SYMAS_PREFIX/bin:$SYMAS_PREFIX/sbin
+
+export CONF_D=$SYMAS_PREFIX/etc/openldap/slapd.d
+mkdir $CONF_D
+slaptest -f ./slapd.conf -F $CONF_D
+
+useradd -u 389 -r ldap
+
+chgrp -R ldap $CONF_D/..
+
+cat symas-openldap > /etc/default/symas-openldap
+
