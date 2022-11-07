@@ -1,0 +1,3 @@
+#SLAPD_URLS="ldap:/// ldapi:///"
+SLAPD_OPTIONs="-u ldap -g ldap"
+ExecStart=/opt/symas/lib/slapd -d 0 -h ${SLAPD_URLS} $SLAPD_OPTIONS
