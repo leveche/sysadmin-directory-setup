@@ -1,6 +1,6 @@
 apt-get update; apt-get upgrade
 apt-get install gnupg; apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DA26A148887DCBEB
-apt update
 wget -q https://repo.symas.com/configs/SOLDAP/d11/release26.list -O /etc/apt/sources.list.d/soldap-release26.list
+apt update
 apt install symas-openldap-clients symas-openldap-server
 apt-get install git
