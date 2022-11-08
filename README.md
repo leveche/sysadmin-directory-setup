@@ -31,3 +31,7 @@ source ./pkg
 export DIT_ROOT="o=example"
 ./add-tree
 ```
+Verify the database has been created with the root object:
+```bash
+ldapsearch -b $DIT_ROOT
+```
