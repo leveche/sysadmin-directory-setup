@@ -4,15 +4,30 @@ export SYMAS_PREFIX=/opt/symas
 
 export PATH=$PATH:$SYMAS_PREFIX/lib:$SYMAS_PREFIX/bin:$SYMAS_PREFIX/sbin
 
-export SYMAS_ETC=$SYMAS_PREFIX/etc/openldap/etc
+export CONF_D=$SYMAS_PREFIX/etc/openldap
 export SLAPD_D=$SYMAS_PREFIX/etc/openldap/slapd.d
 mkdir $SLAPD_D
 
-slaptest -f ./slapd.conf -F $SLAP_D
+slaptest -f ./slapd.conf -F $SLAPD_D
 
 useradd -u 389 -r ldap
 
-chgrp -R ldap $SYMAS_ETC
+chgrp -R ldap $CONF_D
 
 cat symas-openldap > /etc/default/symas-openldap
+rm -f $CONF_D/*.default
 
+cat ./ldap.conf > $CONF_D/ldap.conf
+
+# Now we start the slapd daemon; further configuration will be done online via the ldap interface
+# The linux root user is the superuser and can modify the config
+
+systemctl start slapd
+
+# To verify:
+ldapsearch
+# should return the current running configuration
+
+# Finally, prepare the ownership of the data directory
+export DATA_DIR=/var/symas/openldap-data
+chown ldap:ldap $DATA_DIR
