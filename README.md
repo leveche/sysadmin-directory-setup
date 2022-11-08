@@ -15,3 +15,19 @@ pct create 110 \
   --onboot 1 \
   --start 1
 ```
+
+## Add Symas openLDAP repo and install packages
+```bash
+source ./pkg
+```
+
+## Bootstrap the bare-minimum slapd instance
+```bash
+./setup
+```
+
+## Declare the DIT ROOT and create the corresponding LDAP database
+```bash
+export DIT_ROOT="o=example"
+./add-tree
+```
