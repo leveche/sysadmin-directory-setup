@@ -8,7 +8,7 @@ export SYMAS_ETC=$SYMAS_PREFIX/etc/openldap/etc
 export SLAPD_D=$SYMAS_PREFIX/etc/openldap/slapd.d
 mkdir $SLAPD_D
 
-slaptest -f ./slapd.conf -F $CONF_D
+slaptest -f ./slapd.conf -F $SLAP_D
 
 useradd -u 389 -r ldap
 
